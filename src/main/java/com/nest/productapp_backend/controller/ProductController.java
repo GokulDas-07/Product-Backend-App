@@ -28,5 +28,11 @@ public class ProductController {
         return "edit product";
     }
 
+    @GetMapping("/view")
+    public String ViewProducts()
+    {
+        return "View Products";
+    }
+
 
 }
