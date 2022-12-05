@@ -16,5 +16,11 @@ public class ProductController {
         return "Add product page";
     }
 
+    @PostMapping("/search")
+    public String SearchProduct()
+    {
+        return "Search product";
+    }
+
 
 }
