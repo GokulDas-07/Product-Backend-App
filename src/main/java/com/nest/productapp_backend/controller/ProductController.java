@@ -34,5 +34,11 @@ public class ProductController {
         return "View Products";
     }
 
+    @PostMapping("/delete")
+    public String DeleteProduct()
+    {
+        return "Delete product";
+    }
+
 
 }
