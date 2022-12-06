@@ -1,19 +1,28 @@
 package com.nest.productapp_backend.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.nest.productapp_backend.dao.ProductDao;
+import com.nest.productapp_backend.model.Product;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class ProductController {
+
+    @Autowired
+    private ProductDao dao;
+    @CrossOrigin(origins = "*")
     @GetMapping("/")
     public String HomePage(){
-        return "welcome to home page";
+        return "welcome to product home page";
     }
-    @PostMapping("/add")
-    public String AddProduct()
+    @PostMapping(path = "/add",consumes = "application/json",produces = "application/json")
+    public String AddProduct(@RequestBody Product p)
     {
-        return "Add product page";
+        System.out.println(p.toString());
+        dao.save(p);
+        return "Product added";
     }
 
     @PostMapping("/search")
@@ -27,11 +36,11 @@ public class ProductController {
     {
         return "edit product";
     }
-
+    @CrossOrigin(origins = "*")
     @GetMapping("/view")
-    public String ViewProducts()
+    public List<Product> ViewProducts()
     {
-        return "View Products";
+        return (List<Product>) dao.findAll();
     }
 
     @PostMapping("/delete")
